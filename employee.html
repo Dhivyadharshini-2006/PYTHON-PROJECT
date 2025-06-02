@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Management</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form, table {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        input, select {
+            margin: 8px 0;
+            padding: 8px;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <h2>Employee Management</h2>
+
+    <form method="POST" action="/add_employee">
+        <h3>Add New Employee</h3>
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="text" name="emp_id" placeholder="Employee ID" required>
+        <input type="text" name="department" placeholder="Department" required>
+        <input type="text" name="role" placeholder="Role" required>
+        <select name="status" required>
+            <option value="Active">Active</option>
+            <option value="On Leave">On Leave</option>
+            <option value="Resigned">Resigned</option>
+        </select>
+        <button type="submit" class="btn">Add Employee</button>
+    </form>
+
+    <h3>Employee List</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Employee ID</th>
+            <th>Department</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        {% for emp in employees %}
+        <tr>
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.emp_id }}</td>
+            <td>{{ emp.department }}</td>
+            <td>{{ emp.role }}</td>
+            <td>{{ emp.status }}</td>
+            <td>
+                <a href="/delete_employee/{{ emp.emp_id }}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

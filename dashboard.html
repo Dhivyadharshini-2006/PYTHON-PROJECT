@@ -1,0 +1,69 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f0f2f5;
+            margin: 0;
+        }
+
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        header img {
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            background: #fff;
+            margin: 0;
+        }
+
+        nav ul li {
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="https://t4.ftcdn.net/jpg/13/12/67/31/360_F_1312673151_ilArCGKCLq0zFajNI5Qka8XHfw90xFJk.jpg" alt="Avatar">
+    <div>
+        <h2>Welcome, {{ username }}</h2>
+        <p>Joining Year: 2020 | Experience: 3 years</p>
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="{{ url_for('employee_page') }}">Employee Management</a></li>
+        <li><a href="{{ url_for('attendance_page') }}">Attendance & Leave</a></li>
+        <li><a href="{{ url_for('task_page') }}">Task Management</a></li>
+        <li><a href="{{ url_for('meeting_page') }}">Meeting Scheduler</a></li>
+        <li><a href="{{ url_for('documents') }}">Document Management</a></li>
+        <li><a href="{{ url_for('kudos_page') }}">Kudos Wall</a></li>
+        <li><a href="{{ url_for('reports') }}">Reports & Analytics</a></li>
+    </ul>
+</nav>
+
+</body>
+</html>

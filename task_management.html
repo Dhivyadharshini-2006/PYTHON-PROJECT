@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .form-box, .task-box {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, select, button {
+            padding: 8px;
+            margin: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Task Management</h1>
+
+    <div class="form-box">
+        <form action="/add_task" method="POST">
+            <input type="text" name="task_name" placeholder="Task Name" required>
+            <input type="text" name="assigned_to" placeholder="Assign To" required>
+            <select name="priority" required>
+                <option value="">Priority</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+
+    <div class="task-box">
+        <h2>Existing Tasks</h2>
+        <table>
+            <tr>
+                <th>Task Name</th>
+                <th>Assigned To</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.task_name }}</td>
+                <td>{{ task.assigned_to }}</td>
+                <td>{{ task.priority }}</td>
+                <td>{{ task.status }}</td>
+                <td>
+                    <form action="/update_task_status" method="POST">
+                        <input type="hidden" name="task_name" value="{{ task.task_name }}">
+                        <select name="status" required>
+                            <option value="In Progress" {% if task.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                            <option value="Completed" {% if task.status == 'Completed' %}selected{% endif %}>Completed</option>
+                            <option value="On Hold" {% if task.status == 'On Hold' %}selected{% endif %}>On Hold</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/delete_task" method="POST">
+                        <input type="hidden" name="task_name" value="{{ task.task_name }}">
+                        <button type="submit" onclick="return confirm('Delete this task?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>

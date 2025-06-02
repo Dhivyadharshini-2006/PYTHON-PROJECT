@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kudos Wall</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .kudos-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            margin-bottom: 30px;
+        }
+        .kudos-feed {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        .kudo-item {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Kudos Wall</h1>
+
+    <div class="kudos-form">
+        <form action="/post_kudos" method="POST">
+            <label for="from">From:</label><br>
+            <input type="text" name="from" required><br><br>
+
+            <label for="to">To:</label><br>
+            <input type="text" name="to" required><br><br>
+
+            <label for="message">Message:</label><br>
+            <textarea name="message" rows="4" cols="50" required></textarea><br><br>
+
+            <button type="submit">Send Kudos</button>
+        </form>
+    </div>
+
+    <div class="kudos-feed">
+        <h2>💬 Kudos Feed</h2>
+        {% for kudo in kudos %}
+        <div class="kudo-item">
+            <strong>{{ kudo.from }} ➡️ {{ kudo.to }}</strong><br>
+            <p>{{ kudo.message }}</p>
+        </div>
+        {% else %}
+        <p>No kudos yet. Be the first to send one!</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reports & Analytics</title>
+    <style>
+        body { font-family: Arial; background: #e8f0fe; padding: 40px; }
+        .card {
+            background: white; padding: 20px; border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 20px;
+        }
+        h2 { color: #333; }
+    </style>
+</head>
+<body>
+    <h2>Reports & Analytics</h2>
+
+    <div class="card"><strong>Total Employees:</strong> {{ total_employees }}</div>
+    <div class="card"><strong>Total Attendance Records:</strong> {{ total_attendance }}</div>
+    <div class="card"><strong>Total Tasks Assigned:</strong> {{ total_tasks }}</div>
+    <div class="card"><strong>Completed Tasks:</strong> {{ completed_tasks }}</div>
+    <div class="card"><strong>Pending Tasks:</strong> {{ pending_tasks }}</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance & Leave Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        form, table {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            width: 100%;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        table {
+            margin-top: 30px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Attendance Tracking</h2>
+    <form method="POST" action="/check_in">
+        <input type="text" name="name" placeholder="Employee Name" required>
+        <button type="submit">Check In</button>
+    </form>
+
+    <form method="POST" action="/check_out">
+        <input type="text" name="name" placeholder="Employee Name" required>
+        <button type="submit">Check Out</button>
+    </form>
+
+    <h3>Attendance Records</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Check-In</th>
+            <th>Check-Out</th>
+        </tr>
+        {% for a in attendance %}
+        <tr>
+            <td>{{ a.name }}</td>
+            <td>{{ a.check_in }}</td>
+            <td>{{ a.check_out or '---' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Leave Request</h2>
+    <form method="POST" action="/submit_leave">
+        <input type="text" name="name" placeholder="Employee Name" required>
+        <input type="date" name="date" required>
+        <textarea name="reason" placeholder="Leave Reason" required></textarea>
+        <button type="submit">Submit Leave Request</button>
+    </form>
+
+    <h3>Leave Requests</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Reason</th>
+            <th>Status</th>
+        </tr>
+        {% for l in leaves %}
+        <tr>
+            <td>{{ l.name }}</td>
+            <td>{{ l.date }}</td>
+            <td>{{ l.reason }}</td>
+            <td>{{ l.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
